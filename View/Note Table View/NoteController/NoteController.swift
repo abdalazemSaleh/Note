@@ -40,5 +40,4 @@ class NoteController: UIViewController, NoteView, reloadTableView {
         // Reload data
         self.noteTable.reloadData()
     }
-    
 }

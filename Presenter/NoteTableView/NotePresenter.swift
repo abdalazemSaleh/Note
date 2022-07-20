@@ -33,4 +33,25 @@ class NotePresenter {
         cell.decription.text = note.text
         return cell
     }
+    // Cell
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // Creat swipe Action
+        let action = UIContextualAction(style: .destructive, title: "Delete") { [self] (action, view, completionHandelar) in
+            
+            // Wich person to remove
+            let noteToRemove = self.nots[indexPath.row]
+            
+            // Remove the person
+            model.removeNote(note: noteToRemove)
+                        
+            // Re-fetch data
+            fetchNots()
+            tableView.reloadData()
+            
+        }
+        
+        // Return swipe action
+        return UISwipeActionsConfiguration(actions: [action])
+
+    }
 }

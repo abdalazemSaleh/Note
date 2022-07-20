@@ -28,7 +28,23 @@ extension NoteController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         presenter.noteCell(tableView: tableView, atIndexPath: indexPath)
     }
-    
+    // MARK: - Did select row
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let VC = AddNewNote()
+        VC.delegate = self
+        VC.edite = true
+        let item = presenter.nots[indexPath.row]
+        VC.myNote = item
+        self.modalPresentationStyle = .overFullScreen
+        self.modalTransitionStyle = .crossDissolve
+        self.present(VC, animated: true, completion: nil)
+
+    }
+    // MARK: - UISwipe Action
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return presenter.tableView(tableView, trailingSwipeActionsConfigurationForRowAt: indexPath)
+    }
+    // MARK: - Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }

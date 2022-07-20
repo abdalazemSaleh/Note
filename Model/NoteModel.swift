@@ -22,8 +22,11 @@ class NoteModel {
         saveData()
     }
     // TODO: Remove note
-    func removeNote() {
-
+    func removeNote(note: Note) {
+        // Remove the person
+        self.context.delete(note)
+        // Save data
+        saveData()
     }
     // Fetch nots
     func fetchNote() -> [Note] {
@@ -31,7 +34,6 @@ class NoteModel {
         do {
             let request = Note.fetchRequest() as NSFetchRequest<Note>
             item = try context.fetch(request)
-            print(item)
         } catch {
             print(error.localizedDescription)
         }

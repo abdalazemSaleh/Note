@@ -12,12 +12,15 @@ class AddNewNote: UIViewController, AddNewNoteView {
     // MARK: - Variables
     var presenter: AddNewNotePresenter!
     var delegate : reloadTableView?
+    var edite = false
+    var myNote = Note()
     // MARK: - View did load
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = AddNewNotePresenter(view: self)
         handelView()
-    }
+        checkEdite()
+        }
     // MARK: - IBOutlet
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var descriptionTextView: UITextView!
@@ -33,6 +36,13 @@ class AddNewNote: UIViewController, AddNewNoteView {
 //        myView.layer.cornerRadius = 32
         titleTextField.layer.cornerRadius = 8
         descriptionTextView.layer.cornerRadius = 8
+    }
+    // MARK: - Check if note is old
+    func checkEdite() {
+        if edite == true {
+            titleTextField.text = myNote.title
+            descriptionTextView.text = myNote.text
+        }
     }
     
 }
